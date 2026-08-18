@@ -36,9 +36,13 @@ Marketing site for **Infinity Stone Works** — tagline **"Quality That Never En
 
 ## Output Defaults
 
+– Web pages information:
+  - infinitystoneworks.shop
+  - you are to only grab information from the website, for use on the new pages. Do NOT use any styling, color, or font styles from this website.
+
 – Eight pages, each its own `.html` file at the project root, sharing one external stylesheet at `css/style.css`:
   - `index.html` — Welcome
-  - `collection.html` — Our Curated Collection
+  - `collection.html` — Our Curated Collection 
   - `homeowner-information.html` — Homeowner Information
   - `care-warranty.html` — Care & Warranty
   - `photos.html` — Photos
