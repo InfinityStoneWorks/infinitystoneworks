@@ -1,0 +1,15 @@
+{
+  "name": "infinitystoneworks",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "serve": "node serve.mjs",
+    "screenshot": "node screenshot.mjs"
+  },
+  "dependencies": {
+    "puppeteer": "^24.0.0"
+  },
+  "allowScripts": {
+    "puppeteer@24.43.1": true
+  }
+}
