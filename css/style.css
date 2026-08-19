@@ -447,7 +447,7 @@ input, textarea, select {
   font-weight: 600;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1180px) {
   .nav-toggle {
     display: none;
   }
