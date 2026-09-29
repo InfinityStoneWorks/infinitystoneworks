@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "serve": "node serve.mjs",
-    "screenshot": "node screenshot.mjs"
+    "screenshot": "node screenshot.mjs",
+    "fetch-reviews": "node fetch-google-reviews.mjs"
   },
   "dependencies": {
     "puppeteer": "^24.0.0"

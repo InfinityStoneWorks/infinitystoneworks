@@ -2283,3 +2283,294 @@ details[open] > .group-body-wrap {
   background: color-mix(in srgb, var(--bg-light) 14%, transparent);
   transform: translateY(-1px);
 }
+
+/* ==========================================================================
+   Reviews
+   ========================================================================== */
+
+.hero-reviews {
+  background-image: url("../assets/reviews/reviews-bg.jpg");
+  background-size: cover;
+  background-position: center 90%;
+}
+
+.review-source {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.review-source-heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.review-source-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--charcoal);
+  color: var(--bg-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.review-source-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.review-source h2 {
+  font-size: var(--text-xl);
+}
+
+.review-summary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+  color: var(--color-text-soft);
+  font-size: var(--text-sm);
+}
+
+.review-summary-count {
+  font-weight: 600;
+  color: var(--charcoal);
+}
+
+.review-source-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.6em 1.2em;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--umber);
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--duration-fast) var(--ease-spring),
+              box-shadow var(--duration-fast) var(--ease-standard),
+              background-color var(--duration-fast) var(--ease-standard),
+              color var(--duration-fast) var(--ease-standard);
+}
+
+.review-source-link:hover,
+.review-source-link:focus-visible {
+  transform: translateY(-2px);
+  background: var(--charcoal);
+  color: var(--bg-light);
+  box-shadow: var(--shadow-md);
+}
+
+/* --- Star rating (CSS-only, fractional) --- */
+
+.star-rating {
+  position: relative;
+  display: inline-block;
+  font-size: 1.05rem;
+  line-height: 1;
+  letter-spacing: 2px;
+  white-space: nowrap;
+}
+
+.star-rating-bg,
+.star-rating-fg {
+  display: block;
+}
+
+.star-rating-bg {
+  color: var(--color-border);
+}
+
+.star-rating-fg {
+  position: absolute;
+  inset: 0 auto 0 0;
+  overflow: hidden;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+/* --- Review cards --- */
+
+.reviews-grid {
+  display: grid;
+  align-items: start;
+  gap: var(--space-4);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 760px) {
+  .reviews-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.review-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+}
+
+.review-card-text {
+  color: var(--color-text-soft);
+}
+
+/* --- Expandable long reviews --- */
+
+.review-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.review-card-body[data-expandable] {
+  position: relative;
+  max-height: 165px;
+  overflow: hidden;
+  transition: max-height var(--duration-med) var(--ease-standard);
+}
+
+.review-card-body[data-expandable]::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 56px;
+  background: linear-gradient(to bottom, transparent, var(--color-surface));
+  pointer-events: none;
+  transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.review-card-body[data-expandable][data-expanded="true"]::after {
+  opacity: 0;
+}
+
+.review-expand-toggle {
+  align-self: flex-start;
+  background: none;
+  border: 0;
+  padding: 0;
+  font-weight: 600;
+  font-size: var(--text-sm);
+  color: var(--umber);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--umber) 40%, transparent);
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-standard),
+              border-color var(--duration-fast) var(--ease-standard);
+}
+
+.review-expand-toggle:hover,
+.review-expand-toggle:focus-visible {
+  color: var(--charcoal);
+  border-color: var(--charcoal);
+}
+
+.review-card-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.review-avatar {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--color-surface-alt);
+}
+
+.review-avatar-fallback {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--gold) 20%, white);
+  color: var(--umber);
+  font-family: var(--font-display);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.review-card-author {
+  font-weight: 600;
+  color: var(--charcoal);
+  font-size: var(--text-sm);
+}
+
+.review-card-date {
+  font-size: var(--text-xs);
+  color: var(--color-text-soft);
+}
+
+.reviews-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--space-6) var(--space-5);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  color: var(--color-text-soft);
+  font-size: var(--text-sm);
+}
+
+/* --- Review photos (reuses .photo-item's lightbox click-binding) --- */
+
+.review-photos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.review-photo.photo-item {
+  width: 96px;
+  height: 96px;
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.review-photo.photo-item img {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   FAQ
+   ========================================================================== */
+
+.hero-faq {
+  background-image: url("../assets/faq/faq-bg.JPG");
+  background-size: cover;
+  background-position: center 10%;
+}
+
+.faq-answer {
+  color: var(--color-text-soft);
+}
+
+.faq-note {
+  text-align: center;
+  color: var(--color-text-soft);
+  margin-bottom: var(--space-6);
+}
+
+.faq-note a {
+  color: var(--umber);
+  font-weight: 600;
+}

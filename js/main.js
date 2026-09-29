@@ -188,3 +188,109 @@ if (lightbox) {
     }
   });
 }
+
+// Google reviews — rendered from a static JSON file that
+// fetch-google-reviews.mjs regenerates by hand; never a live API call.
+function starRatingHtml(rating) {
+  const safeRating = Math.max(0, Math.min(5, rating || 0));
+  const pct = (safeRating / 5) * 100;
+  return (
+    `<span class="star-rating" role="img" aria-label="${safeRating} out of 5 stars">` +
+    `<span class="star-rating-bg" aria-hidden="true">★★★★★</span>` +
+    `<span class="star-rating-fg" aria-hidden="true" style="width:${pct}%">★★★★★</span>` +
+    `</span>`
+  );
+}
+
+function initial(name) {
+  return (name || "?").trim().charAt(0).toUpperCase();
+}
+
+function escapeHtml(value) {
+  const map = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+  return String(value ?? "").replace(/[&<>"']/g, (c) => map[c]);
+}
+
+const googleReviewsGrid = document.querySelector("#google-reviews-grid");
+if (googleReviewsGrid) {
+  fetch("/assets/reviews/google-reviews.json")
+    .then((res) => (res.ok ? res.json() : Promise.reject(new Error("bad response"))))
+    .then((data) => {
+      const reviews = Array.isArray(data.reviews) ? data.reviews : [];
+
+      const summaryEl = document.querySelector("#google-reviews-summary");
+      if (summaryEl && data.rating) {
+        summaryEl.innerHTML =
+          starRatingHtml(data.rating) +
+          `<span class="review-summary-count">${data.rating.toFixed(1)}</span>` +
+          `<span>(${data.total} review${data.total === 1 ? "" : "s"})</span>`;
+      }
+
+      const linkEl = document.querySelector("#google-reviews-link");
+      if (linkEl && data.mapsUrl) {
+        linkEl.href = data.mapsUrl;
+      }
+
+      if (reviews.length === 0) {
+        googleReviewsGrid.innerHTML =
+          '<p class="reviews-empty">Google reviews haven’t been connected yet — run <code>npm run fetch-reviews</code> once a Places API key is set up to load them here.</p>';
+        return;
+      }
+
+      googleReviewsGrid.innerHTML = reviews
+        .map((r) => {
+          const author = escapeHtml(r.author);
+          const avatar = r.photoUrl
+            ? `<img class="review-avatar" src="${escapeHtml(r.photoUrl)}" alt="" width="40" height="40">`
+            : `<span class="review-avatar-fallback" aria-hidden="true">${escapeHtml(initial(r.author))}</span>`;
+          return (
+            `<div class="review-card">` +
+            `<div class="review-card-meta">${avatar}<div><p class="review-card-author">${author}</p>` +
+            `<p class="review-card-date">${escapeHtml(r.relativeTime)}</p></div></div>` +
+            starRatingHtml(r.rating) +
+            `<p class="review-card-text">${escapeHtml(r.text)}</p>` +
+            `</div>`
+          );
+        })
+        .join("");
+    })
+    .catch(() => {
+      googleReviewsGrid.innerHTML =
+        '<p class="reviews-empty">Google reviews haven’t been connected yet — run <code>npm run fetch-reviews</code> once a Places API key is set up to load them here.</p>';
+    });
+}
+
+// Expand/collapse toggle for long reviews. Animates between the real
+// collapsed and full content heights (measured, not an arbitrary large
+// max-height) — an oversized ceiling makes the eased transition reach the
+// true height almost instantly on expand while collapse crawls through the
+// same curve's slow tail, so expand and collapse end up looking asymmetric.
+document.querySelectorAll(".review-expand-toggle").forEach((btn) => {
+  const body = btn.previousElementSibling;
+  if (!body || !body.hasAttribute("data-expandable")) return;
+
+  // Captured while still in its default collapsed state at page load —
+  // matches the CSS-defined collapsed max-height without duplicating it.
+  // scrollHeight is safe to read here too: it always reports the full
+  // unclipped content height regardless of the current max-height.
+  const collapsedHeight = body.getBoundingClientRect().height;
+  const fullHeight = body.scrollHeight;
+
+  // A fixed transition-duration makes a short reveal and a much longer one
+  // travel very different pixel distances in the same clock time, so a long
+  // review's card visibly snaps open faster than a short one's. Scale the
+  // duration with how far this specific card actually travels — calibrated
+  // so a ~134px reveal lands on the original 420ms, capped so a very long
+  // review never feels sluggish to open.
+  const delta = fullHeight - collapsedHeight;
+  const duration = Math.min(650, Math.round(250 + delta * 1.27));
+  body.style.transitionDuration = `${duration}ms`;
+
+  btn.addEventListener("click", () => {
+    const expanded = body.getAttribute("data-expanded") === "true";
+    body.style.maxHeight = expanded ? `${collapsedHeight}px` : `${fullHeight}px`;
+    body.setAttribute("data-expanded", String(!expanded));
+    btn.setAttribute("aria-expanded", String(!expanded));
+    btn.textContent = expanded ? "Read more" : "Show less";
+  });
+});
