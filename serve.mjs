@@ -25,7 +25,7 @@ const MIME_TYPES = {
 
 const server = http.createServer((req, res) => {
   let requestPath = decodeURIComponent(req.url.split("?")[0]);
-  if (requestPath === "/") requestPath = "/index.html";
+  if (requestPath.endsWith("/")) requestPath += "index.html";
 
   const filePath = path.normalize(path.join(ROOT, requestPath));
 

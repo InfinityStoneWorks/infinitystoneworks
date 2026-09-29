@@ -8,47 +8,25 @@ Marketing site for **Infinity Stone Works** — tagline **"Quality That Never En
 
 – **Invoke the `frontend-design` skill** before writing any frontend code. No skipping, no exceptions, every single session.
 
-## Local Server
-
-– **Everything gets served on localhost** — taking a screenshot from a `file:///` URL is not acceptable.
-
-– Spin up the dev server using `node serve.mjs` (this serves the project root at `http://localhost:3000`)
-
-– `serve.mjs` is in the project root. Get it running in the background before any screenshot step.
-
-– Check whether the server is already up before starting it again. One instance at a time.
-
-## Screenshot Workflow
-
-– Puppeteer is a project dependency (installed via `npm install`) and manages its own bundled Chromium — no separate paths needed.
-
-– **Screenshots always come from localhost:** `node screenshot.mjs http://localhost:3000/<page>.html`
-
-– Each screenshot is written to `./temporary screenshots/screenshot-N.png`, auto-incremented and never overwritten.
-
-– To attach a label: `node screenshot.mjs http://localhost:3000/<page>.html label` → saves as `screenshot-N-label.png`
-
-– `screenshot.mjs` is in the project root. Do not modify it.
-
-– Once the screenshot is saved, read the PNG from `temporary screenshots/` using the Read tool to view and review it.
-
-– Review each page after building it: spacing/padding, font size/weight/line-height, colors (exact hex), alignment, border-radius, shadows, image sizing, and that nav/links to the other 7 pages work.
-
 ## Output Defaults
 
 – Web pages information:
   - infinitystoneworks.shop
   - you are to only grab information from the website, for use on the new pages. Do NOT use any styling, color, or font styles from this website.
 
-– Eight pages, each its own `.html` file at the project root, sharing one external stylesheet at `css/style.css`:
-  - `index.html` — Welcome
-  - `collection.html` — Our Curated Collection 
-  - `homeowner-information.html` — Homeowner Information
-  - `care-warranty.html` — Care & Warranty
-  - `photos.html` — Photos
-  - `reviews.html` — Reviews
-  - `faq.html` — FAQ
-  - `contact.html` — Contact Us
+– Eight pages, sharing one external stylesheet at `css/style.css`. Pages use the **pretty URL** technique — every page (except Welcome) lives in its own folder as `index.html`, so it's reachable without a `.html` extension (e.g. `/collection/` instead of `/collection.html`). This works with zero server config on any static host, including GoDaddy, because web servers serve a directory's `index.html` by default:
+  - `index.html` — Welcome (`/`)
+  - `collection/index.html` — Our Curated Collection (`/collection/`)
+  - `homeowner-information/index.html` — Homeowner Information (`/homeowner-information/`)
+  - `care-warranty/index.html` — Care & Warranty (`/care-warranty/`)
+  - `photos/index.html` — Photos (`/photos/`)
+  - `reviews/index.html` — Reviews (`/reviews/`)
+  - `faq/index.html` — FAQ (`/faq/`)
+  - `contact/index.html` — Contact Us (`/contact/`)
+
+  Homeowner Information also spawns two nested sub-pages (see `SITE-INFO.md`): `homeowner-information/project-guide/index.html` (`/homeowner-information/project-guide/`) and `homeowner-information/project-guide/checklist/index.html` (`/homeowner-information/project-guide/checklist/`).
+
+  Because pages live at varying folder depths, every internal link (nav, footer, logo, in-page links) and every shared-asset reference (`css/style.css`, `js/main.js`, `brand_assets/`, `assets/`) must use a **root-relative path** (leading `/`) — never a page-relative one — so it resolves correctly no matter how deep the page is nested.
 
 – Every page shares the same header (site name + tagline), nav linking to all 8 pages, and footer.
 
@@ -96,6 +74,8 @@ Marketing site for **Infinity Stone Works** — tagline **"Quality That Never En
 ## Hard Rules
 
 – Every page uses the shared header, nav, and footer — no one-off layouts per page
+
+– Every internal link and shared-asset reference uses a root-relative path (leading `/`), never `.html` or a page-relative path — pretty URLs break otherwise
 
 – `transition: all` is never used
 
