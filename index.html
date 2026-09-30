@@ -15,6 +15,7 @@
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <header class="site-header">
+  <div id="top"></div>
   <div class="container">
     <a class="brand" href="/">
       <img src="/brand_assets/Primary-Logo.png" alt="" width="70" height="60">
@@ -146,45 +147,15 @@
   <!-- Lead-gen contact -->
   <section class="section section-alt" id="quote">
     <div class="container">
-      <div class="section-head">
-        <p class="eyebrow" style="color: var(--umber);">Get Started</p>
-        <h2>Get a free quote</h2>
-        <p>Tell us about your project and we'll follow up with pricing and availability. Prefer to talk it through? Call or email the showroom directly.</p>
-      </div>
-
-      <div class="contact-grid">
-        <form class="form-card" action="#" method="post">
-          <div class="form-row two-col">
-            <div class="field">
-              <label for="name">Full name</label>
-              <input type="text" id="name" name="name" autocomplete="name" required>
-            </div>
-            <div class="field">
-              <label for="phone">Phone</label>
-              <input type="tel" id="phone" name="phone" autocomplete="tel" required>
-            </div>
+      <div class="contact-grid quote-grid">
+        <div class="quote-intro">
+          <div class="section-head">
+            <p class="eyebrow" style="color: var(--umber);">Get Started</p>
+            <h2>Get a free quote</h2>
+            <p>Tell us about your project and we'll follow up with pricing and availability. Prefer to talk it through? Call or email the showroom directly.</p>
           </div>
-          <div class="field">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" autocomplete="email" required>
-          </div>
-          <div class="field">
-            <label for="project-type">Project type</label>
-            <select id="project-type" name="project-type">
-              <option value="kitchen">Kitchen countertops</option>
-              <option value="bathroom">Bathroom vanity</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="details">Project details</label>
-            <textarea id="details" name="details" placeholder="Material, approximate square footage, timeline&hellip;" required></textarea>
-          </div>
-          <div class="form-submit">
-            <button class="btn btn-primary" type="submit">Send Project Details</button>
-            <span class="form-note">We typically reply within one business day.</span>
-          </div>
-        </form>
+          <a class="btn btn-primary" href="/contact/">Get a free quote</a>
+        </div>
 
         <div class="contact-card">
           <h3>Visit or reach the showroom</h3>
@@ -202,7 +173,8 @@
           </div>
           <div class="contact-line">
             <span>Hours</span>
-            <span>By appointment</span>
+            <span>Mon - Fri</span>
+            <span>8:00am - 4:00pm</span>
           </div>
         </div>
       </div>
@@ -260,6 +232,7 @@
   </div>
 </footer>
 
+<a href="#top" class="back-to-top">&uparrow;</a>
 <script src="/js/main.js" defer></script>
 </body>
 </html>

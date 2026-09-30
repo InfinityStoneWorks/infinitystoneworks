@@ -1071,6 +1071,17 @@ input, textarea, select {
   }
 }
 
+@media (min-width: 900px) {
+  .quote-grid {
+    grid-template-columns: 1fr 1fr;
+    /* align-items: center; */
+  }
+}
+
+.quote-intro .section-head {
+  margin-bottom: var(--space-5);
+}
+
 .form-card {
   background: var(--color-surface);
   border-radius: var(--radius-lg);
