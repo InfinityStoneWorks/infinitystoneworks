@@ -166,7 +166,7 @@
             <div class="form-row two-col">
               <div class="field">
                 <label for="phone">Phone</label>
-                <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(253) 555-0123" pattern="\(\d{3}\) \d{3}-\d{4}" title="Enter a 10-digit phone number" required>
+                <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(555) 555-0123" pattern="\(\d{3}\) \d{3}-\d{4}" title="Enter a 10-digit phone number" required>
               </div>
               <div class="field">
                 <label for="email">Email</label>
@@ -176,7 +176,7 @@
 
             <div class="field">
               <label for="message">Tell us about your project</label>
-              <textarea id="message" name="message" rows="4" required></textarea>
+              <textarea id="message" name="message" rows="4" placeholder="Message here..." required></textarea>
             </div>
 
             <!-- Honeypot: hidden from people, filled in by bots. Web3Forms rejects the submission if it's checked. -->
@@ -271,7 +271,9 @@
   </div>
 </footer>
 
-<a href="#top" class="back-to-top">&uparrow;</a>
+<a href="#top" class="back-to-top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+</a>
 <script src="/js/main.js" defer></script>
 </body>
 </html>

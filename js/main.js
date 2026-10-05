@@ -21,6 +21,27 @@ if (navToggle && siteNav) {
   });
 }
 
+// Back-to-top button: fades in once the page is scrolled past the threshold
+const backToTop = document.querySelector(".back-to-top");
+if (backToTop) {
+  const SHOW_AFTER_PX = 300;
+  let ticking = false;
+
+  const updateBackToTop = () => {
+    backToTop.classList.toggle("is-visible", window.scrollY > SHOW_AFTER_PX);
+    ticking = false;
+  };
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(updateBackToTop);
+    }
+  }, { passive: true });
+
+  updateBackToTop();
+}
+
 // Signature vein-divider draw-in
 const veinDivider = document.querySelector(".vein-divider");
 if (veinDivider && !reduceMotion) {
