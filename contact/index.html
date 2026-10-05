@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | Infinity Stone Works</title>
+<meta name="description" content="Contact Infinity Stone Works in Lakewood, Washington. Send us your project details for a free quote, or visit the showroom on Steilacoom Blvd SW.">
+<link rel="icon" href="/brand_assets/Primary-Logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/">
+      <img src="/brand_assets/Primary-Logo.png" alt="" width="70" height="60">
+      <span class="brand-type">
+        <span class="brand-name">Infinity Stone Works</span>
+        <span class="brand-tagline">Quality That Never Ends</span>
+      </span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation menu">
+      <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+    </button>
+
+    <nav class="site-nav" id="site-nav" data-open="false" aria-label="Primary">
+      <ul>
+        <li><a href="/">Welcome</a></li>
+        <li><a href="/collection/">Curated Collection</a></li>
+        <li><a href="/homeowner-information/">Homeowner Info</a></li>
+        <li><a href="/care-warranty/">Care &amp; Warranty</a></li>
+        <li><a href="/photos/">Photos</a></li>
+        <li><a href="/reviews/">Reviews</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+        <li><a href="/contact/" aria-current="page">Contact Us</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- Hero (reuses the collection photo until a contact-specific one is supplied) -->
+  <section class="hero hero-contact">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">Contact Us</p>
+        <h1>Let's talk about your project.</h1>
+        <p class="hero-sub">Send us the details and we'll follow up with pricing and availability &mdash; or stop by the showroom and see the slabs in person.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Form + showroom details -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="contact-grid">
+
+        <div class="form-card">
+          <h2 class="form-title">Send us a message</h2>
+
+          <form class="web3form" data-form-source="Contact page" data-subject="New message from the Contact page" method="post" action="https://api.web3forms.com/submit" novalidate>
+            <div class="form-row two-col">
+              <div class="field">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="phone">Phone</label>
+                <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(253) 555-0123" pattern="\(\d{3}\) \d{3}-\d{4}" title="Enter a 10-digit phone number" required>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+            </div>
+
+            <div class="form-row two-col">
+              <div class="field">
+                <label for="project-type">Project type <span class="field-optional">(optional)</span></label>
+                <select id="project-type" name="project_type">
+                  <option value="">Select one</option>
+                  <option>Kitchen</option>
+                  <option>Bathroom</option>
+                  <option>Outdoor</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="material">Preferred material <span class="field-optional">(optional)</span></label>
+                <select id="material" name="material">
+                  <option value="">Select one</option>
+                  <option>Granite</option>
+                  <option>Marble</option>
+                  <option>Quartz</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+
+            <div class="field">
+              <label for="photos">Photos <span class="field-optional">(optional)</span></label>
+              <input id="photos" name="attachment" type="file" accept="image/jpeg,image/png,image/webp,image/heic" multiple aria-describedby="photos-hint photos-list">
+              <p class="field-hint" id="photos-hint">Up to 5 photos of your space, 5 MB each. JPG, PNG, WebP or HEIC.</p>
+              <ul class="file-picks" id="photos-list" aria-live="polite"></ul>
+            </div>
+
+            <div class="field">
+              <label for="referral">How did you hear about us? <span class="field-optional">(optional)</span></label>
+              <select id="referral" name="referral">
+                <option value="">Select one</option>
+                <option>Google search</option>
+                <option>Yelp</option>
+                <option>Facebook</option>
+                <option>Friend or family</option>
+                <option>Contractor or designer</option>
+                <option>Drove by the showroom</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <!-- Honeypot: hidden from people, filled in by bots. Web3Forms rejects the submission if it's checked. -->
+            <input type="checkbox" name="botcheck" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+            <!--
+              reCAPTCHA v2 (not active yet). Once the Web3Forms Pro plan and the reCAPTCHA
+              secret key are in place:
+                1. Add this script to the page <head>:
+                   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                2. Uncomment the line below and replace the site key:
+                   <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY"></div>
+                3. In js/main.js, send the g-recaptcha-response field (see RECAPTCHA note).
+            -->
+            <!-- <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY"></div> -->
+
+            <div class="form-submit">
+              <button class="btn btn-primary" type="submit">Send message</button>
+              <p class="form-note">We'll reply by phone or email.</p>
+            </div>
+
+            <p class="form-status" role="status" aria-live="polite" tabindex="-1" hidden></p>
+          </form>
+
+          <noscript><p class="form-note">This form needs JavaScript. Please call <a href="tel:+12532671561">(253) 267-1561</a> or email <a href="mailto:Info@infinitystoneworks.net">Info@infinitystoneworks.net</a>.</p></noscript>
+        </div>
+
+        <div class="contact-aside">
+          <div class="contact-card">
+            <h3>Visit or reach the showroom</h3>
+            <div class="contact-line">
+              <span>Phone</span>
+              <a href="tel:+12532671561">(253) 267-1561</a>
+            </div>
+            <div class="contact-line">
+              <span>Email</span>
+              <a href="mailto:Info@infinitystoneworks.net">Info@infinitystoneworks.net</a>
+            </div>
+            <div class="contact-line">
+              <span>Address</span>
+              <a href="https://www.google.com/maps/place/Infinity+Stone+Works/@47.1770732,-122.5146698,372m/data=!3m1!1e3!4m6!3m5!1s0x5491019b7ea17581:0x56edf2dcebb9a13f!8m2!3d47.1768845!4d-122.5144344!16s%2Fg%2F11j5tzp5s4?entry=ttu&g_ep=EgoyMDI2MDgxNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">5503 Steilacoom Blvd SW, Lakewood, WA 98499</a>
+            </div>
+            <div class="contact-line">
+              <span>Hours</span>
+              <span>Mon - Fri</span>
+              <span>8:00am - 4:00pm</span>
+            </div>
+          </div>
+
+          <div class="map-frame">
+            <iframe
+              title="Map showing Infinity Stone Works at 5503 Steilacoom Blvd SW, Lakewood, WA"
+              src="https://maps.google.com/maps?q=5503+Steilacoom+Blvd+SW,+Lakewood,+WA+98499&amp;z=14&amp;output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="footer-brand" href="/">
+          <img src="/brand_assets/Primary-Logo-Reversed.png" alt="" width="61" height="52">
+          <span class="brand-type">
+            <span class="brand-name">Infinity Stone Works</span>
+            <span class="brand-tagline">Quality That Never Ends</span>
+          </span>
+        </a>
+        <p class="footer-desc">Custom quartz, granite, and marble countertops, fabricated and installed in Lakewood, Washington.</p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/100562991628302" target="_blank" rel="noopener" aria-label="Infinity Stone Works on Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5h2.5l.5-3h-3V8.5c0-.9.3-1.5 1.6-1.5H16.5V4.3c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4V10.5H8v3h2.3V21h3.2z"/></svg>
+          </a>
+          <a href="https://www.yelp.com/biz/infinity-stone-works-lakewood-2" target="_blank" rel="noopener" aria-label="Infinity Stone Works on Yelp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 3l2 6.8 6.9-2.4c.6 2 .6 4.1 0 6.1L13 11.1l4.5 5.7c-1.4 1.6-3.2 2.7-5.2 3.3l-1.3-7-4.8 5.2c-1.6-1.2-2.8-2.9-3.4-4.9l6.9-1.6L3 8.4c1-1.8 2.6-3.3 4.5-4.2L11 10z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <p class="footer-heading">Explore</p>
+        <ul class="footer-links">
+          <li><a href="/collection/">Our Curated Collection</a></li>
+          <li><a href="/homeowner-information/">Homeowner Information</a></li>
+          <li><a href="/care-warranty/">Care &amp; Warranty</a></li>
+          <li><a href="/photos/">Photos</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer-heading">Company</p>
+        <ul class="footer-links">
+          <li><a href="/reviews/">Reviews</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/contact/">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 Infinity Stone Works. Quality That Never Ends.</span>
+      <span>5503 Steilacoom Blvd SW, Lakewood, WA 98499 &middot; (253) 267-1561</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/main.js" defer></script>
+</body>
+</html>

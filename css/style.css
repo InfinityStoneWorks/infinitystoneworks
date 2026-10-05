@@ -375,8 +375,35 @@ input, textarea, select {
   color: var(--umber);
 }
 
+/* Phones: scale the logo lockup down so the menu button stays on screen */
+@media (max-width: 479px) {
+  .site-header .container {
+    gap: var(--space-3);
+  }
+
+  .brand {
+    flex-shrink: 1;
+    min-width: 0;
+  }
+
+  .brand img {
+    height: 40px;
+    width: auto;
+  }
+
+  .brand-name {
+    font-size: clamp(0.6rem, 3.1vw, 0.9rem);
+  }
+
+  .brand-tagline {
+    font-size: 0.5rem;
+    letter-spacing: var(--tracking-wide);
+  }
+}
+
 .nav-toggle {
   display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   width: 44px;
@@ -1061,19 +1088,20 @@ input, textarea, select {
 
 .contact-grid {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-5);
 }
 
 @media (min-width: 900px) {
   .contact-grid {
-    grid-template-columns: 1.2fr 0.8fr;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
     align-items: start;
   }
 }
 
 @media (min-width: 900px) {
   .quote-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     /* align-items: center; */
   }
 }
@@ -1091,12 +1119,13 @@ input, textarea, select {
 
 .form-row {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-4);
 }
 
 @media (min-width: 560px) {
   .form-row.two-col {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
 }
 
@@ -1126,6 +1155,8 @@ input, textarea, select {
 .field input,
 .field select,
 .field textarea {
+  width: 100%;
+  min-width: 0;
   padding: 0.85em 1em;
   border-radius: var(--radius-sm);
   border: 1px solid var(--color-border);
@@ -1165,6 +1196,159 @@ input, textarea, select {
 .form-note {
   font-size: var(--text-xs);
   color: var(--color-text-soft);
+}
+
+/* --- Form refinements (shared by Welcome + Contact forms) --- */
+
+:root {
+  --color-error: color-mix(in srgb, var(--umber) 55%, #B3261E);
+}
+
+.form-title {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-4);
+}
+
+.form-row + .field,
+.field + .form-row,
+.form-row + .form-row {
+  margin-top: var(--space-4);
+}
+
+.field-optional {
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-text-soft);
+}
+
+.field input:user-invalid,
+.field select:user-invalid,
+.field textarea:user-invalid {
+  border-color: var(--color-error);
+}
+
+.field-hint {
+  font-size: var(--text-xs);
+  color: var(--color-text-soft);
+}
+
+.field input[type="file"] {
+  padding: var(--space-2);
+  cursor: pointer;
+}
+
+.field input[type="file"]::file-selector-button {
+  margin-right: var(--space-3);
+  padding: 0.6em 1.1em;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--umber);
+  font-family: inherit;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-standard),
+              color var(--duration-fast) var(--ease-standard);
+}
+
+.field input[type="file"]::file-selector-button:hover {
+  background: var(--charcoal);
+  color: var(--bg-light);
+}
+
+.field input[type="file"]:active::file-selector-button {
+  background: color-mix(in srgb, var(--charcoal) 88%, black);
+  color: var(--bg-light);
+}
+
+.file-picks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  color: var(--color-text-soft);
+}
+
+.file-picks:empty {
+  display: none;
+}
+
+.file-picks li[data-error] {
+  color: var(--color-error);
+  font-weight: 600;
+}
+
+/* Honeypot checkbox: off-screen rather than display:none so bots still see it */
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+  transform: none;
+}
+
+.form-status {
+  margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-alt);
+  font-size: var(--text-sm);
+}
+
+.form-status:focus-visible {
+  outline: 2px solid var(--color-focus);
+}
+
+.form-status[data-state="success"] {
+  border-color: var(--sage);
+  background: color-mix(in srgb, var(--sage) 14%, white);
+}
+
+.form-status[data-state="error"] {
+  border-color: var(--color-error);
+  background: color-mix(in srgb, var(--color-error) 8%, white);
+}
+
+/* --- Contact page --- */
+
+.hero-contact {
+  background-image: url("../assets/contact/contact-bg.jpg");
+  background-size: cover;
+  background-position: center 60%;
+}
+
+.contact-aside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.map-frame {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  background: var(--color-surface-alt);
+}
+
+.map-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 .contact-card {

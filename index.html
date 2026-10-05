@@ -147,14 +147,53 @@
   <!-- Lead-gen contact -->
   <section class="section section-alt" id="quote">
     <div class="container">
+      <div class="quote-intro">
+        <div class="section-head center">
+          <p class="eyebrow" style="color: var(--umber); justify-content: center;">Get Started</p>
+          <h2>Get a free quote</h2>
+          <p>Tell us about your project and we'll follow up with pricing and availability. Prefer to talk it through? Call or email the showroom directly.</p>
+        </div>
+      </div>
+
       <div class="contact-grid quote-grid">
-        <div class="quote-intro">
-          <div class="section-head">
-            <p class="eyebrow" style="color: var(--umber);">Get Started</p>
-            <h2>Get a free quote</h2>
-            <p>Tell us about your project and we'll follow up with pricing and availability. Prefer to talk it through? Call or email the showroom directly.</p>
-          </div>
-          <a class="btn btn-primary" href="/contact/">Get a free quote</a>
+        <div class="form-card">
+          <form class="web3form" data-form-source="Welcome page" data-subject="New quote request from the Welcome page" method="post" action="https://api.web3forms.com/submit" novalidate>
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" autocomplete="name" required>
+            </div>
+
+            <div class="form-row two-col">
+              <div class="field">
+                <label for="phone">Phone</label>
+                <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(253) 555-0123" pattern="\(\d{3}\) \d{3}-\d{4}" title="Enter a 10-digit phone number" required>
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" required>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="message">Tell us about your project</label>
+              <textarea id="message" name="message" rows="4" required></textarea>
+            </div>
+
+            <!-- Honeypot: hidden from people, filled in by bots. Web3Forms rejects the submission if it's checked. -->
+            <input type="checkbox" name="botcheck" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+            <!-- reCAPTCHA v2 slot (not active yet): see the setup note in /contact/index.html -->
+            <!-- <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY"></div> -->
+
+            <div class="form-submit">
+              <button class="btn btn-primary" type="submit">Request a quote</button>
+              <p class="form-note">Need to share more details? Use the <a href="/contact/">full contact form</a>.</p>
+            </div>
+
+            <p class="form-status" role="status" aria-live="polite" tabindex="-1" hidden></p>
+          </form>
+
+          <noscript><p class="form-note">This form needs JavaScript. Please call <a href="tel:+12532671561">(253) 267-1561</a> or email <a href="mailto:Info@infinitystoneworks.net">Info@infinitystoneworks.net</a>.</p></noscript>
         </div>
 
         <div class="contact-card">

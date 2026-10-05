@@ -51,6 +51,124 @@ if (phoneInput) {
   });
 }
 
+// Web3Forms contact / quote forms. Submissions are emailed to the address the
+// access key was created for (change the recipient by generating a new key).
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+const WEB3FORMS_ACCESS_KEY = "3703527b-4128-43ba-b43f-9c9d96c26cb2";
+
+document.querySelectorAll("form.web3form").forEach((form) => {
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const status = form.querySelector(".form-status");
+  const submitLabel = submitBtn.textContent;
+
+  // Optional photo attachments (Contact form only)
+  const MAX_PHOTOS = 5;
+  const MAX_PHOTO_BYTES = 5 * 1024 * 1024;
+  const photoInput = form.elements.attachment;
+  const photoList = form.querySelector(".file-picks");
+
+  const renderPhotos = (files, error) => {
+    if (!photoList) return;
+    photoList.innerHTML = "";
+    if (error) {
+      const li = document.createElement("li");
+      li.dataset.error = "true";
+      li.textContent = error;
+      photoList.appendChild(li);
+      return;
+    }
+    files.forEach((file) => {
+      const li = document.createElement("li");
+      li.textContent = `${file.name} (${(file.size / 1024 / 1024).toFixed(1)} MB)`;
+      photoList.appendChild(li);
+    });
+  };
+
+  if (photoInput) {
+    photoInput.addEventListener("change", () => {
+      const files = Array.from(photoInput.files);
+      let error = "";
+      if (files.length > MAX_PHOTOS) {
+        error = `Choose up to ${MAX_PHOTOS} photos. You picked ${files.length}.`;
+      } else if (files.some((f) => f.size > MAX_PHOTO_BYTES)) {
+        error = "Each photo must be 5 MB or smaller. Remove the larger ones and choose again.";
+      }
+      if (error) photoInput.value = "";
+      renderPhotos(error ? [] : files, error);
+    });
+    form.addEventListener("reset", () => renderPhotos([]));
+  }
+
+  const showStatus = (state, message) => {
+    status.hidden = false;
+    status.dataset.state = state;
+    status.textContent = message;
+    status.focus();
+  };
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const data = Object.fromEntries(new FormData(form));
+    const photos = photoInput ? Array.from(photoInput.files) : [];
+    delete data.attachment;
+    const honeypotTripped = form.elements.botcheck && form.elements.botcheck.checked;
+    delete data.botcheck;
+
+    // A bot ticked the hidden box: pretend it worked and send nothing.
+    if (honeypotTripped) {
+      form.reset();
+      showStatus("success", "Thanks. Your message was sent.");
+      return;
+    }
+
+    data.access_key = WEB3FORMS_ACCESS_KEY;
+    data.subject = form.dataset.subject || "New message from infinitystoneworks.net";
+    data.from_name = "Infinity Stone Works website";
+    data.form_source = form.dataset.formSource || "Website";
+
+    // RECAPTCHA: once reCAPTCHA v2 is enabled (Web3Forms Pro), also send the
+    // widget's token, e.g. data["g-recaptcha-response"] = grecaptcha.getResponse();
+    // and call grecaptcha.reset() after a successful send.
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending...";
+
+    try {
+      let request;
+      if (photos.length) {
+        // Attachments require multipart; the browser sets the Content-Type boundary itself.
+        const body = new FormData();
+        Object.entries(data).forEach(([key, value]) => body.append(key, value));
+        photos.forEach((file) => body.append("attachment", file));
+        request = { method: "POST", headers: { Accept: "application/json" }, body };
+      } else {
+        request = {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify(data),
+        };
+      }
+      const res = await fetch(WEB3FORMS_ENDPOINT, request);
+      const result = await res.json();
+      if (!res.ok || !result.success) throw new Error(result.message || "Request failed");
+
+      form.reset();
+      showStatus("success", `Thanks, ${data.name}. We received your message and will follow up by phone or email.`);
+    } catch (err) {
+      showStatus("error", "Your message didn't send. Check your connection and try again, or call (253) 267-1561.");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = submitLabel;
+    }
+  });
+});
+
 // Open a <details> accordion when a same-page link jumps to it
 function openDetailsTarget(hash) {
   if (!hash || hash.length < 2) return;
