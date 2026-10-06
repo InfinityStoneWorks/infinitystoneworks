@@ -829,11 +829,17 @@ input, textarea, select {
 
 .material-card-media {
   position: relative;
+  width: calc(100% - 2 * var(--space-5));
+  height: auto;
   aspect-ratio: 1 / 1;
+  flex-shrink: 0;
+  margin: var(--space-5) auto 0;
   overflow: hidden;
 }
 
 .material-card-media img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
